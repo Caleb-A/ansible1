@@ -1,0 +1,18 @@
+---
+- name: test playbook
+  hosts: myvm
+  gather_facts: yes
+  tasks:
+    - name: Grabbing Network Interface Name using grep
+      shell: |
+        ip addr | grep UP | grep pfifo | awk '{print $2}' | tr -d :
+      register: interfacename
+    - name: displaying interface name
+      debug:
+        msg: Network interface {{ interfacename.stdout }}
+    - name: Ansible Inventory Fact
+      debug:
+        msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
+    - name: Testing Inventory
+      debug:
+        var: ansible_default_ipv4.address
