@@ -1,0 +1,13 @@
+---
+- name: install and start nginx
+  hosts: myvm
+
+  tasks:
+  - name: install nginx
+    zypper: 
+      name: nginx 
+      state: present
+  - name: start nginx
+    service: 
+      name: nginx 
+      state: started

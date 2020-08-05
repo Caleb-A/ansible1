@@ -1,0 +1,13 @@
+---
+- name: stop and uninstall nginx
+  hosts: myvm
+
+  tasks:
+  - name: stop nginx service
+    service:
+      name: nginx
+      state: stopped
+  - name: uninstall nginx
+    zypper:
+      name: nginx
+      state: absent
